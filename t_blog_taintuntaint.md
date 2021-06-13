@@ -34,7 +34,7 @@ The end to end flow for the provisioning resources by using any RESTAPI client a
 
 For the end to end flow for provising resource by using command line, see [How to fix by using command line?](https://cloud.ibm.com/docs/schematics?topic=schematics-tainted-resources).
 
-!(Sample command line for taint and untaint status)[/images/cli_taint.png]
+![Sample command line for taint and untaint status](/images/cli_taint.png)
 
 **What's next**
 
