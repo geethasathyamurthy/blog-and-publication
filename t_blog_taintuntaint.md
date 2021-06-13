@@ -4,7 +4,7 @@
 
 The user sets up IBM Cloud resources by using IBM Cloud Schematic workspace. Through the workspace, user generates a plan, and apply the plan to provision the resources. During the process of the provisioning the resources, users resource such as Event Streams or Cloud Databases take longer time to fully provision. The time to provision few resource such as Event Stream failed as timeout.  When the user reruns the Schematics apply action, the action reprovisions by deleting the partial provisioned resources, which frustrated the user.
 
-## Out of the box behaviour.
+## Out of the box behaviour
 The IBM Cloud Provider plug-in for Terraform set eight hours timeouts when the provisioning, update, or deletion of a resource must be completed before it is considered failed. 
 
 ## User issue 
