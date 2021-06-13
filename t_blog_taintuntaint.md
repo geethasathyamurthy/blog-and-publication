@@ -17,16 +17,16 @@ If the provisioning cannot be completed before the timeout is reached, the IBM C
 
 Following steps showcases the implmentation by using API, command line and the console.
 
-**Prerequisites*
+**Prerequisites**
 
-- Make sure that you have access to a paid {{site.data.keyword.cloud_notm}} account. 
-- Learn more [about {{site.data.keyword.bplong_notm}}](/docs/schematics?topic=schematics-about-schematics). 
+- Make sure that you have access to a paid IBM Cloud account. 
+- Learn more [about IBM Cloud Schematics](/docs/schematics?topic=schematics-about-schematics). 
 - Familiarize yourself with the [key terms](/docs/schematics?topic=schematics-about-schematics#schematics-terms), such as workspaces, Terraform templates, and resources. 
-- Find the [{{site.data.keyword.cloud_notm}} resources](https://ibm-cloud.github.io/tf-ibm-docs/?cm_mc_uid=71885624553615726236960&cm_mc_sid_50200000=38067391572884797521) that you want to create with {{site.data.keyword.bplong_notm}}.
+- Find the [IBM Cloud resources](https://ibm-cloud.github.io/tf-ibm-docs/?cm_mc_uid=71885624553615726236960&cm_mc_sid_50200000=38067391572884797521) that you want to create with {{site.data.keyword.bplong_notm}}.
 - Use [sample Terraform templates](https://github.com/IBM-Cloud/terraform-provider-ibm/tree/master/examples) as a basis for your own Terraform template.  
 - Review how to [create a Terraform template and properly store it](/docs/schematics?topic=schematics-create-tf-config). 
 - Plan your [workspace structure](/docs/schematics?topic=schematics-workspace-setup#structure-workspace). 
-- Learn how to use {{site.data.keyword.bplong_notm}} to [manage the lifecycle](/docs/schematics?topic=schematics-manage-lifecycle) of your resources. 
+- Learn how to use IBM Cloud Schematics to [manage the lifecycle](/docs/schematics?topic=schematics-manage-lifecycle) of your resources. 
 a. User authentication to acces IBM Cloud
 b. Authorization and refresh_token details. Execute vi ~/.bluemix/config.json in the terminal to view the authorization and refresh_token.
 
