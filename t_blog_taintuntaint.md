@@ -1,4 +1,4 @@
-# Timeout failures results as tainted or untainted of IBM Cloud resources
+# Reprovisioning resources in IBM Cloud Schematics workspace
 
 ## User scenario
 
