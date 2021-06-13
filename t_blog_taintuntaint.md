@@ -10,7 +10,7 @@ The IBM Cloud Provider plug-in for Terraform set eight hours timeouts when the p
 ## User issue 
 The duplicating of reprovisioning the resources such as Event Stream, was a costlier affair to the user, and frustrated the user.
 
-## Experitise solution
+## Solution
 If the provisioning cannot be completed before the timeout is reached, the IBM Cloud Provider plug-in marks the provisioning process as failed and taints the resource. However, the actual provisioning of the resource is not canceled and continues in the background which can result in a successfully provisioned resource after all. Because the resource is tainted, the resource is automatically deleted and re-created when you run the next Schematics apply action.
 
 Following steps showcases the implmentation by using API, command line and the console.
@@ -45,6 +45,8 @@ You can also create a script to automate the process of creating the workspace t
 Review the following links to find more information about Schematics taint and untaint commands.
 
 - [IBM Cloud Schematics documentation](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference)
+- [Troubleshooting guide for apply failure](https://cloud.ibm.com/docs/schematics?topic=schematics-nullresource-errors)
+- [Troubleshooting guide for taint and untaint](https://cloud.ibm.com/docs/schematics?topic=schematics-tainted-resources)
 
 ## Getting help
 
