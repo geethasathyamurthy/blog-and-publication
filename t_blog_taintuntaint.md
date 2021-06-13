@@ -1,42 +1,45 @@
 # Timeout failures results as tainted or untainted of IBM Cloud resources
 
-The user sets up IBM Cloud resources by using IBM Cloud Schematic workspace. Through the workspace, user generates a plan, and apply the plan to execute the Terraform for provisioning the resources. During the process of the provisioning the resources, the Terraform apply takes a longer time to fully provision, such as Event Streams or Cloud Databases and timeouts. When the user reruns the Schematics apply action, the action fails due to timeouts resulting in a tainted resource. By default the IBM Cloud Schematics apply plan is set to timeout every 8 hours during provisioning the resources.
+## User scenario
 
-The recovery of the resources during the re-executing the plan timeout of 8 hours is reprovisioning the resources such as Event Streams, Cloud Databases, from the start as all the resources were marked as tainted. The duplicating of the reprovisioning the resources, was a costlier affair and dissatisfied the user.
+The user sets up IBM Cloud resources by using IBM Cloud Schematic workspace. Through the workspace, user generates a plan, and apply the plan to provision the resources. During the process of the provisioning the resources, users resource such as Event Streams or Cloud Databases take longer time to fully provision. The time to provision few resource such as Event Stream failed as timeout.  When the user reruns the Schematics apply action, the action reprovisions by deleting the partial provisioned resources, which frustrated the user.
 
-The IBM Cloud Provider plug-in for Terraform sets certain timeouts when the provisioning, update, or deletion of a resource must be completed before it is considered failed. Because some resources such as Event Streams or Cloud Databases take longer to fully provision, they might exceed these timeouts. If the provisioning cannot be completed before the timeout is reached, the IBM Cloud Provider plug-in marks the provisioning process as failed and taints the resource. However, the actual provisioning of the resource is not canceled and continues in the background which can result in a successfully provisioned resource after all. Because the resource is tainted, the resource is automatically deleted and re-created when you run the next Schematics apply action.
+## Out of the box behaviour.
+The IBM Cloud Provider plug-in for Terraform set eight hours timeouts when the provisioning, update, or deletion of a resource must be completed before it is considered failed. 
 
+## User issue 
+The duplicating of reprovisioning the resources such as Event Stream, was a costlier affair to the user, and frustrated the user.
 
-To avoid that a successfully provisioned resource is deleted and re-created, you must untaint the resource.
+## Experitise solution
+If the provisioning cannot be completed before the timeout is reached, the IBM Cloud Provider plug-in marks the provisioning process as failed and taints the resource. However, the actual provisioning of the resource is not canceled and continues in the background which can result in a successfully provisioned resource after all. Because the resource is tainted, the resource is automatically deleted and re-created when you run the next Schematics apply action.
 
-List the workspaces in your account and note the ID of the workspace that includes the failed resource.
+Following steps showcases the implmentation by using API, command line and the console.
 
+**Prerequisites**
+a. User authentication to acces IBM Cloud
+b. Authorization and refresh_token details. Execute vi ~/.bluemix/config.json in the terminal to view the authorization and refresh_token.
 
-ibmcloud schematics workspace list
-Refresh your workspace. A refresh action validates the IBM Cloud resources in your account against the state that is stored in the Terraform statefile of your workspace. This process might take a few minutes to complete.
+**API implementation**
 
+The end to end flow for the provisioning resources by using any RESTAPI client application are:
+1. [Create the workpace](https://cloud.ibm.com/apidocs/schematics#create-workspace).
+2. [Get the workspace ID](https://cloud.ibm.com/apidocs/schematics#get-workspace).
+3. Generate an [apply action](https://cloud.ibm.com/apidocs/schematics#apply-workspace-command).
+4. [Apply plan action](https://cloud.ibm.com/apidocs/schematics#plan-workspace-command) to the workspace.
+5. [Fetch the activity ID](https://cloud.ibm.com/apidocs/schematics#refresh-workspace-command) of the applied plan by using the get operation
+6. Perform the get operation with the workspace activity ID.
+7. Finally, apply resources only when both plan and apply are successfully executed.
 
-ibmcloud schematics refresh --id <workspace_ID>
-Retrieve the template ID of your workspace. To template ID is shown as a string after the Template Variables for: section of your CLI output.
+**Command line implementation**
 
+For the end to end flow for provising resource by using command line, see [How to fix by using command line?](https://cloud.ibm.com/docs/schematics?topic=schematics-tainted-resources).
 
-ibmcloud schematics workspace get --id <workspace_ID>
-Retrieve the Terraform statefile for your workspace and note the name of the resource that is tainted.
+![Uploading image (5).png…](Sample command line for taint and untaint status)
 
+**What's next**
 
-ibmcloud schematics state pull --id <workspace_ID> --template <template_ID>
-Verify that the tainted resource is successfully provisioned and in a healthy state by using the IBM Cloud console, CLI, or API. For example, if you tried to provision an IBM Cloud Kubernetes Service cluster, check that the cluster is in a Normal state and that you can successfully connect to the cluster.
+You can also create a script to automate the process of creating the workspace till provisioning the resources.
 
-Untaint the resource. Enter the name of the tainted resource that you retrieved from the statefile in the --address parameter. For example, a cluster resource name from a statefile might look like this: ibm_container_vpc_cluster.mycluster.
+**support**
 
-
-ibmcloud schematics workspace untaint --id <workspace_ID> --address <resource_name>
-Retrieve the Terraform statefile for your workspace again and verify that your resource is marked as untainted.
-
-
-ibmcloud schematics state pull --id <workspace_ID> --template <template_ID>
-
-Why do timeout failures result in tainted IBM Cloud resources?
-In IBM Cloud Schematics, apply executes the resource provisioning and defaults the timeout occurrence for every 8 hours. 
-
-
+**Author**
