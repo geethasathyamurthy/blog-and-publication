@@ -40,6 +40,12 @@ For the end to end flow for provising resource by using command line, see [How t
 
 You can also create a script to automate the process of creating the workspace till provisioning the resources.
 
-**support**
+## Reference
 
-**Author**
+Review the following links to find more information about Schematics taint and untaint commands.
+
+- [IBM Cloud Schematics documentation](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference)
+
+## Getting help
+
+For help and support for using this feature in IBM Cloud Schematics, see [Getting help and support](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-help).
