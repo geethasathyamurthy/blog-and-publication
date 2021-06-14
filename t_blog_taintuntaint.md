@@ -1,4 +1,4 @@
-# Reprovisioning resources in IBM Cloud Schematics workspace
+# Usage of taint and untaint resource status feature in IBM Cloud Schematics workspace 
 
 ## User scenario
 
